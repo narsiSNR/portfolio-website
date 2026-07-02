@@ -1,267 +1,872 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narsi Reddy Sanikommu — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B29;
+    --paper:#FAF8F5;
+    --periwinkle:#D9D6F7;
+    --periwinkle-deep:#B6B0EE;
+    --sage:#8FA876;
+    --gray:#6B6878;
+    --line:#E4E1F2;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- HEADER ---------- */
+
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--periwinkle);
+    border-bottom:1px solid var(--periwinkle-deep);
+  }
+
+  .header-inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding:1.25rem 2rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.35rem;
+    letter-spacing:-0.01em;
+  }
+
+  .brand span{
+    color:var(--gray);
+    font-weight:400;
+    font-size:0.95rem;
+    display:block;
+    margin-top:0.15rem;
+    font-family:'Inter', sans-serif;
+  }
+
+  nav{
+    display:flex;
+    align-items:center;
+    gap:1.75rem;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:1.75rem;
+    font-size:0.92rem;
+    font-weight:500;
+  }
+
+  .nav-links a{
+    opacity:0.75;
+    transition:opacity 0.15s ease;
+  }
+  .nav-links a:hover{ opacity:1; }
+
+  .contact-icons{
+    display:flex;
+    align-items:center;
+    gap:0.9rem;
+    padding-left:1.5rem;
+    border-left:1px solid var(--periwinkle-deep);
+  }
+
+  .icon-btn{
+    position:relative;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--periwinkle);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .icon-btn:hover{
+    transform:translateY(-2px);
+    background:var(--sage);
+    color:var(--ink);
+  }
+  .icon-btn svg{ width:17px; height:17px; }
+
+  .icon-tooltip{
+    position:absolute;
+    bottom:calc(100% + 10px);
+    left:50%;
+    transform:translateX(-50%) translateY(4px);
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:0.8rem;
+    font-weight:500;
+    white-space:nowrap;
+    padding:0.4rem 0.7rem;
+    border-radius:8px;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 0.15s ease, transform 0.15s ease;
+    z-index:10;
+  }
+  .icon-tooltip::after{
+    content:'';
+    position:absolute;
+    top:100%;
+    left:50%;
+    transform:translateX(-50%);
+    border:5px solid transparent;
+    border-top-color:var(--ink);
+  }
+  .icon-btn:hover .icon-tooltip{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero{
+    max-width:1200px;
+    margin:0 auto;
+    padding:5rem 2rem 4rem;
+  }
+
+  .hero-eyebrow{
+    font-size:0.85rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--sage);
+    margin-bottom:1rem;
+  }
+
+  .hero h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.05;
+    max-width:14ch;
+  }
+
+  .hero p{
+    margin-top:1.5rem;
+    max-width:46ch;
+    font-size:1.1rem;
+    color:var(--gray);
+  }
+
+  /* ---------- SKILLS ---------- */
+
+  .skills{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 2rem 5rem;
+  }
+
+  .skills-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.9rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin-bottom:2rem;
+  }
+
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1.5rem;
+  }
+
+  .skill-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.5rem 1.6rem;
+  }
+
+  .skill-card--wide{
+    grid-column:span 2;
+  }
+
+  .skill-card h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.05rem;
+    font-weight:600;
+    margin-bottom:0.9rem;
+    padding-bottom:0.7rem;
+    border-bottom:2px solid var(--periwinkle);
+  }
+
+  .skill-card ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+  }
+
+  .skill-card li{
+    position:relative;
+    padding-left:1.1rem;
+    font-size:0.92rem;
+    color:var(--ink);
+    line-height:1.5;
+  }
+
+  .skill-card li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0.55em;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--sage);
+  }
+
+  .skill-card li strong{
+    font-weight:600;
+  }
+
+  .skill-card li a{
+    color:var(--ink);
+    text-decoration:underline;
+    text-decoration-color:var(--periwinkle-deep);
+    text-underline-offset:3px;
+    transition:color 0.15s ease;
+  }
+  .skill-card li a:hover{
+    color:var(--sage);
+  }
+
+  @media (max-width: 980px){
+    .skills-grid{ grid-template-columns:repeat(2, 1fr); }
+    .skill-card--wide{ grid-column:span 2; }
+  }
+
+  @media (max-width: 600px){
+    .skills-grid{ grid-template-columns:1fr; }
+    .skill-card--wide{ grid-column:span 1; }
+  }
+
+  /* ---------- PROJECT LABEL BAR ---------- */
+
+  .project{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 2rem 5rem;
+  }
+
+  .project-label{
+    position:relative;
+    background:var(--periwinkle);
+    border-radius:14px;
+    padding:1.1rem 1.75rem;
+    margin-bottom:2.25rem;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .project-label h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:var(--ink);
+    position:relative;
+    z-index:2;
+  }
+
+  .project-label .subtitle{
+    font-size:0.9rem;
+    color:var(--gray);
+    position:relative;
+    z-index:2;
+    font-weight:500;
+  }
+
+  .project-watermark{
+    position:absolute;
+    right:1rem;
+    top:50%;
+    transform:translateY(-50%);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:5.5rem;
+    font-weight:700;
+    color:var(--periwinkle-deep);
+    opacity:0.55;
+    line-height:1;
+    user-select:none;
+    z-index:1;
+  }
+
+  /* ---------- COLUMNS ---------- */
+
+  .columns{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2rem;
+  }
+
+  .col-card{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .col-image{
+    width:100%;
+    aspect-ratio:4/3;
+    border-radius:12px;
+    overflow:hidden;
+    background:linear-gradient(180deg, #CFE8F7 0%, #EAF6FD 60%, #EAF6FD 100%);
+    position:relative;
+    margin-bottom:1.1rem;
+    border:1px solid var(--line);
+  }
+
+  .col-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* Modifier: fit by width — image scales to fill the box's full width,
+     height adjusts proportionally (no horizontal cropping, may letterbox
+     top/bottom or overflow vertically depending on the image's own ratio). */
+  .col-image img.fit-width{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
+
+  /* Modifier: fit by height — image scales to fill the box's full height,
+     width adjusts proportionally (no vertical cropping, may letterbox
+     left/right or overflow horizontally depending on the image's own ratio). */
+  .col-image img.fit-height{
+    width:auto;
+    height:100%;
+    object-fit:contain;
+  }
+
+  /* fit-width / fit-height use contain, so center the image and let the
+     box's background gradient show through any empty space. */
+  .col-image img.fit-width,
+  .col-image img.fit-height{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    max-width:100%;
+    max-height:100%;
+  }
+
+  .col-image .hill-back{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:38%;
+    background:#B7D98C;
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    transform:scale(1.5) translateY(20%);
+  }
+
+  .col-image .hill-front{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:26%;
+    background:var(--sage);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    transform:scale(1.6) translateY(25%);
+  }
+
+  .col-image .cloud{
+    position:absolute;
+    top:18%;
+    left:22%;
+    width:32%;
+    height:22%;
+    background:#fff;
+    border-radius:50px;
+  }
+  .col-image .cloud::before,
+  .col-image .cloud::after{
+    content:'';
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+  }
+  .col-image .cloud::before{
+    width:55%; height:140%;
+    top:-50%; left:5%;
+  }
+  .col-image .cloud::after{
+    width:45%; height:110%;
+    top:-35%; right:10%;
+  }
+
+  .col-card h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:0.65rem;
+  }
+
+  .col-card ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+  }
+
+  .col-card li{
+    position:relative;
+    padding-left:1.1rem;
+    font-size:0.96rem;
+    color:var(--ink);
+  }
+
+  .col-card li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0.5em;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--sage);
+  }
+
+  .col-card.what h3{ color:var(--ink); }
+  .col-card.how h3{ color:var(--ink); }
+  .col-card.result h3{ color:var(--ink); }
+  .col-card.result li::before{ background:#D8A857; }
+  .col-card.how li::before{ background:#7C9BD9; }
+
+  /* ---------- DIVIDER ---------- */
+
+  .divider{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 2rem;
+  }
+  .divider hr{
+    border:none;
+    border-top:1px solid var(--line);
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:3.5rem 2rem 2.5rem;
+    margin-top:2rem;
+  }
+
+  .footer-inner{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:2rem;
+  }
+
+  .footer-inner h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.6rem;
+    font-weight:600;
+    max-width:18ch;
+  }
+
+  .footer-icons{
+    display:flex;
+    gap:0.9rem;
+  }
+  .footer-icons .icon-btn{
+    background:var(--periwinkle);
+    color:var(--ink);
+  }
+  .footer-icons .icon-btn:hover{
+    background:var(--sage);
+  }
+
+  .footer-meta{
+    width:100%;
+    margin-top:2.5rem;
+    padding-top:1.5rem;
+    border-top:1px solid rgba(250,248,245,0.15);
+    font-size:0.82rem;
+    color:rgba(250,248,245,0.55);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width: 880px){
+    .columns{ grid-template-columns:1fr; gap:2.25rem; }
+    .nav-links{ display:none; }
+    .project-watermark{ font-size:3.5rem; }
+    .hero{ padding:3.5rem 1.5rem 2.5rem; }
+    .header-inner{ padding:1rem 1.5rem; }
+    .project{ padding:0 1.5rem 3.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--sage);
+    outline-offset:3px;
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">My Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications</a></li>
-            </ul>
-        </div>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      Narsi Reddy Sanikommu
+      <span>Mechanical, Design &amp; Hardware Engineer</span>
+    </div>
+    <nav>
+      <div class="nav-links">
+        <a href="#project-1">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="contact-icons">
+        <a class="icon-btn" href="mailto:narsireddysanikommu@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+        </a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/narsireddysanikommu/" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 10.27h-3v-4.5c0-1.07-.02-2.45-1.5-2.45-1.5 0-1.73 1.17-1.73 2.37v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z"/></svg>
+        </a>
+        <a class="icon-btn" href="tel:+19452203331" aria-label="Phone">
+          <span class="icon-tooltip">(945) 220-3331</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.91.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+        </a>
+      </div>
     </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Showcasing my skills, projects, and publications</p>
-        </div>
-    </section>
+<section class="hero" id="about">
+  <div class="hero-eyebrow">Selected Professional work and academic projects</div>
+<!--
+  <h1>Work that holds up under questions.</h1>
+  <p>A look at how a couple of recent projects came together — what they set out to do, how they got built, and what came out the other end.</p>
+  
+-->  
+</section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card skill-card--compact">
-                    <h3>Programming</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>C</li>
-                        <li>C++</li>
-                    </ul>
-                </div>
+<section class="skills" id="skills">
+  <h2 class="skills-title">Skills</h2>
+  <div class="skills-grid">
 
-                <div class="skill-card skill-card--compact">
-                    <h3>Software</h3>
-                    <ul>
-                        <li>Microsoft Project</li>
-                        <li>Minitab</li>
-                        <li>Arduino IDE</li>
-                        <li>MATLAB</li>
-                        <li>ROS2</li>
-                        <li>Processing</li>
-                    </ul>
-                </div>
+    <div class="skill-card">
+      <h3>Programming</h3>
+      <ul>
+        <li>Python</li>
+        <li>C</li>
+        <li>C++</li>
+      </ul>
+    </div>
 
-                <div class="skill-card skill-card--compact">
-                    <h3>CAD & Simulation</h3>
-                    <ul>
-                        <li>CorelDRAW</li>
-                        <li>KiCAD</li>
-                        <li>Revit</li>
-                        <li>Teamcenter PLM</li>
-                        <li>SolidWorks</li>
-                        <li>CATIA</li>
-                        <li>ANSYS</li>
-                        <li>Abaqus</li>
-                        <li>Creo</li>
-                        <li>AutoCAD</li>
-                        <li>Fusion 360</li>
-                        <li>NX CAD</li>
-                        <li>SolidEdge</li>
-                        <li>Umake</li>
-                        <li>Shapr3D</li>
-                    </ul>
-                </div>
+    <div class="skill-card">
+      <h3>Software</h3>
+      <ul>
+        <li>Microsoft Project</li>
+        <li>Minitab</li>
+        <li>Arduino IDE</li>
+        <li>MATLAB</li>
+        <li>ROS2</li>
+        <li>Processing</li>
+      </ul>
+    </div>
 
-                <div class="skill-card skill-card--wide">
-                    <h3>Technical Skills</h3>
-                    <ul>
-                        <li>GD&T, SAP (ECRO, ECM, BOM, PO)</li>
-                        <li><strong>Rapid Prototyping:</strong> 3D Printing (FDM, SLA), Laser cutting.</li>
-                        <li><strong>Design for Six Sigma:</strong> BioDesign, RCA, MSA, DFMA, FMEA,Product Innovation.</li>
-                        <li><strong>Design Controls:</strong> User Needs, System Requirements, DIDO, V&V, DVDR, Engineering Change, CAPA, Product Development.</li>
-                        <li><strong>Advanced MicroFabrication:</strong> Photolithography, Soft Lithography, CVD, Thermal oxidation, ThinFilm deposition, Microfluidic Device Design, MEMS Device Fabrication.</li>
-                        <li><strong>Material Characterization:</strong> TEM, SEM, EDX Spectroscopy, Diffraction Analysis, AFM, Optical Microscopy.</li>
-                    </ul>
-                </div>
+    <div class="skill-card">
+      <h3>CAD &amp; Simulation</h3>
+      <ul>
+        <li>CorelDRAW</li>
+        <li>KiCAD</li>
+        <li>Revit</li>
+        <li>Teamcenter PLM</li>
+        <li>SolidWorks</li>
+        <li>CATIA</li>
+        <li>ANSYS</li>
+        <li>Abaqus</li>
+        <li>Creo</li>
+        <li>AutoCAD</li>
+        <li>Fusion 360</li>
+        <li>NX CAD</li>
+        <li>SolidEdge</li>
+        <li>Umake</li>
+        <li>Shapr3D</li>
+      </ul>
+    </div>
 
-                <div class="skill-card">
-                    <h3>Certification</h3>
-                    <ul>
-                        <li><a href="Files/dfss_foundation.pdf" target="_blank">DFSS Foundation</a></li>
-                        <li><a href="Files/Solid-Edge-Expert-Level-Certification-Solid-Edge-Certificate-CAD-Certification.pdf" target="_blank">SolidEdge Expert level</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="skill-card">
+      <h3>Certification</h3>
+      <ul>
+        <li><a href="Files/dfss_foundation.pdf" target="_blank">DFSS Foundation</a></li>
+        <li><a href="Files/Solid-Edge-Expert-Level-Certification-Solid-Edge-Certificate-CAD-Certification.pdf" target="_blank">SolidEdge Expert level</a></li>
+      </ul>
+    </div>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3>Becton, Dickinson, And Company</h3>
-                    <p class="experience-meta"><em>Mechanical Engineering intern</em> — July 2025 – January 2026, Sparks, MD, USA</p>
-                    <ul>
-                        <li>Led test fixture development for BD COR subsystems by designing and validating load-testing fixtures for COR electrical motors, enabling controlled failure replication and root-cause identification of field-returned motors.</li>
-                        <li>Performed feasibility study and design iteration of the BD COR PX load cell using SolidWorks, including leak testing and final design validation; the proposed design enables real-time measurement of sample, diluent, and reagent weights, reducing sample waste, improving error detection, and enhancing troubleshooting capability.</li>
-                        <li>Executed root cause analysis (RCA) on the BD COR MX extractor magnetic strength characterization fixture; implemented minimal design changes to eliminate fixture warping by adding a snap-fit support feature that consolidates PCB loading forces into the metal holder.</li>
-                        <li>Designed and validated an analog replacement fixture for the BD COR GX shuttle to characterize tube puncture force and GX clamp-pin material force profiles; developed a spring-based mechanism that accurately replicates puncture force behavior for 20k cycles, significantly improving test efficiency compared to the prior 120k-cycle tube-replacement-intensive setup.</li>
-                        <li>Conducted detailed characterization of the BD COR MX liquid waste sensor, developing a 3D contour map of sensor activation as a function of liquid volume, sensor Z-height, and X-offset from the collector; enabled prediction of sensor trigger volume with 95% accuracy to inform physical design decisions.</li>
-                    </ul>
-                </div>
-                <div class="experience-card">
-                    <h3>Dr Gracias Lab</h3>
-                    <p class="experience-meta"><em>Research Assistant</em> — Oct 2024 – Nov 2025, Baltimore, MD, USA</p>
-                    <ul>
-                        <div class="project-card">
-                    <img src="Project images/hydrogel.png" alt="hydrogel" class="project-img">
-                    </div>
-                        <li>Designed and fabricated soft, autonomous microneedle roll devices using photolithography & soft lithography for targeted drug delivery in the GI tract, reducing fabrication time from <strong>2 hours to 2 minutes</strong> and improving mold-release yield from <strong>40% to 80%</strong>.</li>
-                        <li>Created custom Python code to automate the measurement of radius of unfolding for microneedle devices, using OpenCV and NumPy, with additional manual feature, allowed to reduce video analysis time to 1 day from conventional imagej manual measurements</li>
-                        <div class="project-card">
-                    <img src="Project images/shell electrode.png" alt="shell electrode" class="project-img">
-                    </div>
-                        <li>Fabricated Micro electrode array sheell for neuromorphic computing applications with sequencial metal layers using photolithography, thermal evapouration and electroplatting</li>
-                    </ul>
-                </div>
-                <div class="experience-card">
-                    <h3>Becton, Dickinson, And Company</h3>
-                    <p class="experience-meta"><em>Design Engineer 2, Design Engineer 1, GET</em> — July 2020 – Aug 2023, Bangalore, India</p>
-                    <ul>
-                        <li>Led multiple PE projects involving material change by updating <strong>SolidWorks</strong> drawings per <strong>GD&T</strong> standards, planned and executed DV activities, analyzed data with <strong>Minitab</strong>, DV Protocols &amp; report release, DV Reviews, and ECRO process through <strong>Teamcenter PLM</strong> and <strong>SAP</strong>. Completed projects 2 weeks ahead of schedule, avoided back-orders and operation delays.</li>
-                        <li>Coordinated <strong>Test Method updates</strong> by designing a new test fixture and performed <strong>MSA</strong> and <strong>FEA</strong> simulations to replicate fixture engagement with components. Updated and leveraged existing MSA, reducing DV tests by <strong>5x</strong> and saving <strong>2 weeks</strong> of testing time.</li>
-                        <li>Analyzed historical product data to identify lots eligible for re-sterilization during the <strong>Steril Milano recall</strong>, validated safety via leak and pull tests, and enabled significant cost savings; supported REACH compliance by flagging products with potential <strong>PFOA content</strong>.</li>
-                        <li>Revised and implemented incoming inspection protocols and fixture updates at the plant level, ensuring statistical sampling aligned with reliability/confidence level standards—reducing repacking issues by <strong>12%</strong>.</li>
-                        <li>Updated and validated <strong>112 BOMs in SAP</strong>, coordinating with plant stakeholders to avoid duplicate work; detected <strong>5 BOM errors</strong> early, preventing <strong>3 weeks</strong> of potential rework.</li>
-                        <li>Led <strong>RCA</strong> of high-pressure leak-test failures in <strong>BD Alaris pump sets</strong>; implemented fixture and work-instruction updates that eliminated re-testing, preserved <strong>100%</strong> of DV test data, and avoided an estimated <strong>$20K</strong> in retest costs and schedule delays.</li>
-                        <li>Conducted <strong>VoC surveys</strong> and <strong>market scouting</strong> to identify unmet needs in medical devices. Developed solutions and built prototypes with in-house <strong>SLA and FDM printing</strong> for rapid decision-making and comprehensive testing with fixtures. Cutting development time from <strong>ideation to final prototype to 3 weeks</strong>.</li>
-                        <li>Innovatively leveraged existing BD PIVC platform components to create a new HDS product prototype in <strong>1 week at a cost of $100</strong>; led internal VoCs and validation activities, proposing a cost savings strategy by utilizing pre-existing DV data and FDA-cleared data for the next steps of development.</li>
-                        <li>Submitted <strong>68 Invention Disclosure records</strong>, with <strong>14 IDR</strong> filed as <strong>US patents</strong>, and some are in pipeline.</li>
-                    </ul>
-                </div>
-                <div class="experience-card">
-                    <h3>Siemens Center of Excellence, NIT Tiruchirappalli</h3>
-                    
-                    <p class="experience-meta"><em>CAD Designer</em> — May 2019 – Jun 2019, Tiruchirappalli, TN, India</p>
-                    <ul>
-                        <div class="project-card">
-                    <img src="Project images/Ebus_BHEL.png" alt="Ebus_BHEL" class="project-img">
-                    </div>
-                        <li>Designed a <strong>12m electric bus for a BHEL</strong> project using <strong>NX CAD &amp; Nastran</strong>, modeling major subassemblies and performing structural analysis (<strong>Ansys, HyperWorks</strong>) to reduce weight by 15% and optimize seating for a 2:1 seat-to-stand ratio.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="skill-card skill-card--wide">
+      <h3>Technical Skills</h3>
+      <ul>
+        <li>GD&amp;T, SAP (ECRO, ECM, BOM, PO)</li>
+        <li><strong>Rapid Prototyping:</strong> 3D Printing (FDM, SLA), Laser cutting.</li>
+        <li><strong>Design for Six Sigma:</strong> BioDesign, RCA, MSA, DFMA, FMEA, Product Innovation.</li>
+        <li><strong>Design Controls:</strong> User Needs, System Requirements, DIDO, V&amp;V, DVDR, Engineering Change, CAPA, Product Development.</li>
+        <li><strong>Advanced MicroFabrication:</strong> Photolithography, Soft Lithography, CVD, Thermal oxidation, ThinFilm deposition, Microfluidic Device Design, MEMS Device Fabrication.</li>
+        <li><strong>Material Characterization:</strong> TEM, SEM, EDX Spectroscopy, Diffraction Analysis, AFM, Optical Microscopy.</li>
+      </ul>
+    </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="project-container">
+  </div>
+</section>
 
-                <div class="project-card">
-                    <strong>Characterizing Sample Using TEM:</strong>
-                    <img src="Project images/TEM Material characterization.JPG" alt="STEM, EDX Spectrum, EDX mapping, Low mag images" class="project-img">
-                    <p>Characterized crystalline material mixture via TEM using diffraction patterns, HRTEM/LRTEM, STEM, and EDX analysis.</p>
-                </div>
+<section class="project" id="project-1">
+  <div class="project-label">
+    <div>
+      <h2>Project 1</h2>
+      <div class="subtitle">BD COR GX Shuttle fixture</div>
+    </div>
+    <div class="project-watermark">01</div>
+  </div>
 
-                <div class="project-card">
-                    <strong>Operating UR5 to Sketch an Image:</strong>
-                    <img src="Project images/ur5.JPG" alt="UR5" class="project-img">
-                    <p>Programmed UR5 robot with MATLAB and ROS2 to create single-line drawings from input images using inverse kinematics algorithm.</p>
-                </div>
+  <div class="columns">
+    <div class="col-card what">
+      <div class="col-image">
+        <img src="images/project1-what.png" alt="BD Onclarity HPV assay tube shuttle and holder, annotated" class="fit-height">
+      </div>
+      <h3>What?</h3>
+      <ul>
+        Designed and fabricated a spring-based shuttle fixture for BD COR GX/MX systems, replacing tube-based testing (100–500 cycle limit) to enable 20,000+ cycle reliability testing without engineer intervention.
+      </ul>
+    </div>
 
-                <div class="project-card">
-                    <strong>Fabrication of Flow Cytometric Chip:</strong>
-                    <img src="Project images/Flowcytometer.JPG" alt="Fabrication, working of a flowcytometer chip" class="project-img">
-                    <p>Designed and fabricated a microfluidic flow cytometry chip using advanced microfabrication techniques.<br>
-                    <a href="Files/Function and Fabrication of Micro-fluidic Chip for Flow Cytometry.pdf" target="_blank">(Project Report)</a>,
-                    <a href="Files/Flow Cytometery fabrication.pdf" target="_blank">(Slides)</a></p>
-                </div>
+    <div class="col-card how">
+      <div class="col-image">
+        <img src="images/project1-how.png" alt="Project 1 how it was approached" class="fit-height">
+      </div>
+      <h3>How?</h3>
+      <ul>
+        <li>Designed in SolidWorks with GD&amp;T; fabricated via 3D printing and CNC.</li>
+        <li>Sourced components from Lee Spring and McMaster-Carr and built 10 fixtures for testing.</li>
+        <li>Evaluated CNC-machined contact plates in UHMWPE, ABS, SS, Al, and PEEK.</li>
+      </ul>
+    </div>
 
-                <div class="project-card">
-                    <strong>Novel Haptic System with a Single-Cell Refreshable Display:</strong>
-                    <img src="Project images/haptics.JPG" alt="Braille Teaching Module" class="project-img">
-                    <p>Engineered a Braille literacy system achieving 95% accuracy with real-time error correction using Arduino, MATLAB, solenoid actuators, and a custom PCB. Enabled independent learning for visually impaired users.</p>
-                </div>
+    <div class="col-card result">
+      <div class="col-image">
+        <img src="images/project1-results.png" alt="Project 1 results" class="fit-height">
+      </div>
+      <h3>Result!</h3>
+      <ul>
+        <li>Characterized tube puncture force profile using custom test fixture and Shimadzu.</li>
+        <li>Validated UHMWPE plate to match tube force profile within ±10% with various springs.</li>
+        <li>Confirmed consistent performance of UHMWPE plate through 20,000+ cycles.</li>
+       
+      </ul>
+    </div>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <strong>Resistance Spot Welding of Dissimilar Metals</strong> — B.Tech Thesis:
-                    <p>Built an FEA model in Ansys to analyze weld nugget strength under various parameters. Validated results experimentally, cutting experimental costs by 50%.
-                    <a href="https://drive.google.com/file/d/17Npjo_x_8JqqQkRpFSOHQ831MBFLkGnR/view" target="_blank">(Link)</a></p>
-                </div>
+<div class="divider"><hr></div>
 
-            </div>
-        </div>
-    </section>
+<section class="project" id="project-2">
+  <div class="project-label">
+    <div>
+      <h2>Project 2</h2>
+      <div class="subtitle">Bilayer hydrogel microneedle drug delivery system for targeted therapy</div>
+    </div>
+    <div class="project-watermark">02</div>
+  </div>
 
-    <!-- Patents Section -->
-    <section id="publications" class="section">
-        <div class="container">
-            <h2 class="section-title">Patents</h2>
-            <div class="publications-list">
-                <div class="publication-item">
-                    <div class="publication-meta">
-                        <span class="publication-date">2024</span>
-                        <span class="publication-type">Issued Patent</span>
-                    </div>
-                    <h3>Microfluidic Device Fabrication System</h3>
-                    <p class="publication-authors"><strong>Inventors:</strong> Narsi Reddy Sanikommu, Co-Inventor Name</p>
-                    <p class="publication-journal"><strong>Patent No.:</strong> US 12345678 B2 | <strong>Status:</strong> Granted</p>
-                    <p class="publication-description">Innovative fabrication process for microfluidic devices using soft lithography and thin-film deposition techniques.</p>
-                    <div class="publication-links">
-                        <a href="#" class="btn-link">View Patent</a>
-                    </div>
-                </div>
+  <div class="columns">
+    <div class="col-card what">
+      <div class="col-image">
+        <img src="images/project2-what.png" alt="Project 2 what it was" class="fit-height">
+      </div>
+      <h3>What?</h3>
+      <ul>
+        Designed and fabricated a bilayer activated hydrogel microneedle device for targeted drug delivery in the GI tract, targeting chronic conditions like Crohn's disease. Optimized fabrication time and tuned unfolding behavior to control drug delivery timing.
+      </ul>
+    </div>
 
-                <div class="publication-item">
-                    <div class="publication-meta">
-                        <span class="publication-date">2023</span>
-                        <span class="publication-type">Pending Patent</span>
-                    </div>
-                    <h3>Automated MEMS Inspection Tool</h3>
-                    <p class="publication-authors"><strong>Inventors:</strong> Narsi Reddy Sanikommu</p>
-                    <p class="publication-journal"><strong>Application No.:</strong> US 2023/0123456 A1 | <strong>Status:</strong> Pending</p>
-                    <p class="publication-description">Method for high-resolution MEMS inspection combining optical and SEM data for rapid defect detection.</p>
-                    <div class="publication-links">
-                        <a href="#" class="btn-link">View Application</a>
-                    </div>
-                </div>
+    <div class="col-card how">
+      <div class="col-image">
+        <img src="images/project2-how.png" alt="Project 2 how it was approached" class="fit-height">
+      </div>
+      <h3>How?</h3>
+      <ul>
+       
+        <li>Fabricated PDMS microneedle stamps using metal syringe needles, Formlabs SLA, and BMF 3D printing across geometries (cylindrical, star-Shade, flower, helical spring).</li>
+        <li>Applied DOE and Minitab to identify key factors controlling hydrogel unfolding time and microneedle penetration depth in agarose intestinal surrogate. </li>
+        <li>Developed custom Python code (OpenCV, NumPy) to automate video analysis for radius of curvature and penetration depth. </li>
+      </ul>
+    </div>
 
-                <div class="publication-item">
-                    <div class="publication-meta">
-                        <span class="publication-date">2022</span>
-                        <span class="publication-type">Issued Patent</span>
-                    </div>
-                    <h3>Precision 3D Printing Control System</h3>
-                    <p class="publication-authors"><strong>Inventors:</strong> Narsi Reddy Sanikommu, Co-Inventor Name</p>
-                    <p class="publication-journal"><strong>Patent No.:</strong> US 23456789 B1 | <strong>Status:</strong> Granted</p>
-                    <p class="publication-description">System for real-time control of multi-material 3D printing processes, improving accuracy and reducing waste.</p>
-                    <div class="publication-links">
-                        <a href="#" class="btn-link">View Patent</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="col-card result">
+      <div class="col-image">
+        <img src="images/project2-results.png" alt="Project 2 results" class="fit-height">
+      </div>
+      <h3>Result!</h3>
+      <ul>
+        
+        <li>Reduced fabrication time from 2 hours to 10 minutes consistently. </li>
+        <li>Pinpointed hydrogel concentration and device dimensions to achieve 3-minute activation. </li>
+        <li>Cut video processing time from ~1 week to a few hours, replacing manual ImageJ workflows. </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Narsi Reddy Sanikommu</p>
-            <div class="footer-links">
-                <a href="https://www.linkedin.com/in/narsi-reddy-sanikommu" target="_blank">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="mailto:narsireddysanikommu@gmail.com">narsireddysanikommu@gmail.com</a>
-            </div>
-        </div>
-    </footer>
+<div class="divider"><hr></div>
+
+<section class="project" id="project-3">
+  <div class="project-label">
+    <div>
+      <h2>Project 3</h2>
+      <div class="subtitle">Fabrication of Shell Microelectrode array for Neuromorphic Computing</div>
+    </div>
+    <div class="project-watermark">03</div>
+  </div>
+
+  <div class="columns">
+    <div class="col-card what">
+      <div class="col-image">
+        <img src="images/project3-what.png" alt="Project 3 what it was" class="fit-height">
+      </div>
+      <h3>What?</h3>
+      <ul>
+        <li>Sample 1 — describe the problem or brief</li>
+        <li>Sample 2 — who it was for and why it mattered</li>
+      </ul>
+    </div>
+
+    <div class="col-card how">
+      <div class="col-image">
+        <img src="images/project3-how.png" alt="Project 3 how it was approached" class="fit-height">
+      </div>
+      <h3>How?</h3>
+      <ul>
+        <li>Sample 1 — your process or approach</li>
+        <li>Sample 2 — tools, collaborators, constraints</li>
+      </ul>
+    </div>
+
+    <div class="col-card result">
+      <div class="col-image">
+        <img src="images/project3-results.png" alt="Project 3 results" class="fit-height">
+      </div>
+      <h3>Result!</h3>
+      <ul>
+        <li>Sample 1 — the outcome or metric</li>
+        <li>Sample 2 — what changed because of it</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<section class="project" id="project-4">
+  <div class="project-label">
+    <div>
+      <h2>Project 4</h2>
+      <div class="subtitle">Design and validation of E-Bus for BHEL</div>
+    </div>
+    <div class="project-watermark">04</div>
+  </div>
+
+  <div class="columns">
+    <div class="col-card what">
+      <div class="col-image">
+        <img src="images/project4-what.png" alt="Project 4 what it was" class="fit-height">
+      </div>
+      <h3>What?</h3>
+      <ul>
+        <li>Sample 1 — describe the problem or brief</li>
+        <li>Sample 2 — who it was for and why it mattered</li>
+      </ul>
+    </div>
+
+    <div class="col-card how">
+      <div class="col-image">
+        <img src="images/project4-how.png" alt="Project 4 how it was approached" class="fit-height">
+      </div>
+      <h3>How?</h3>
+      <ul>
+        <li>Sample 1 — your process or approach</li>
+        <li>Sample 2 — tools, collaborators, constraints</li>
+      </ul>
+    </div>
+
+    <div class="col-card result">
+      <div class="col-image">
+        <img src="images/project4-results.png" alt="Project 4 results" class="fit-height">
+      </div>
+      <h3>Result!</h3>
+      <ul>
+        <li>Sample 1 — the outcome or metric</li>
+        <li>Sample 2 — what changed because of it</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <h3>Got a project in mind? Let's talk it through.</h3>
+    <div class="footer-icons">
+      <a class="icon-btn" href="mailto:narsireddysanikommu@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/narsireddysanikommu/" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 10.27h-3v-4.5c0-1.07-.02-2.45-1.5-2.45-1.5 0-1.73 1.17-1.73 2.37v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z"/></svg>
+      </a>
+      <a class="icon-btn" href="tel:+19452203331" aria-label="Phone">
+        <span class="icon-tooltip">(945) 220-3331</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.91.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+      </a>
+    </div>
+    <div class="footer-meta">
+      <span>© 2026 Narsi Reddy Sanikommu</span>
+      
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
