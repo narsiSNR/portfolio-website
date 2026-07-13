@@ -18,321 +18,57 @@
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
-
   html{ scroll-behavior:smooth; }
-
-  body{
-    font-family:'Inter', sans-serif;
-    background:var(--paper);
-    color:var(--ink);
-    line-height:1.5;
-  }
-
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); line-height:1.5; }
   a{ color:inherit; text-decoration:none; }
 
   /* ---------- HEADER ---------- */
-
-  header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:var(--periwinkle);
-    border-bottom:1px solid var(--periwinkle-deep);
-  }
-
-  .header-inner{
-    max-width:1200px;
-    margin:0 auto;
-    padding:1.25rem 2rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-
-  .brand{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:1.35rem;
-    letter-spacing:-0.01em;
-  }
-
-  .brand span{
-    color:var(--gray);
-    font-weight:400;
-    font-size:0.95rem;
-    display:block;
-    margin-top:0.15rem;
-    font-family:'Inter', sans-serif;
-  }
-
-  nav{
-    display:flex;
-    align-items:center;
-    gap:1.75rem;
-  }
-
-  .nav-links{
-    display:flex;
-    gap:1.75rem;
-    font-size:0.92rem;
-    font-weight:500;
-  }
-
-  .nav-links a{
-    opacity:0.75;
-    transition:opacity 0.15s ease;
-  }
+  header{ position:sticky; top:0; z-index:50; background:var(--periwinkle); border-bottom:1px solid var(--periwinkle-deep); }
+  .header-inner{ max-width:1200px; margin:0 auto; padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between; }
+  .brand{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.35rem; letter-spacing:-0.01em; }
+  .brand span{ color:var(--gray); font-weight:400; font-size:0.95rem; display:block; margin-top:0.15rem; font-family:'Inter', sans-serif; }
+  nav{ display:flex; align-items:center; gap:1.75rem; }
+  .nav-links{ display:flex; gap:1.75rem; font-size:0.92rem; font-weight:500; }
+  .nav-links a{ opacity:0.75; transition:opacity 0.15s ease; }
   .nav-links a:hover{ opacity:1; }
-
-  .contact-icons{
-    display:flex;
-    align-items:center;
-    gap:0.9rem;
-    padding-left:1.5rem;
-    border-left:1px solid var(--periwinkle-deep);
-  }
-
-  .icon-btn{
-    position:relative;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:var(--ink);
-    color:var(--periwinkle);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:transform 0.15s ease, background 0.15s ease;
-  }
-  .icon-btn:hover{
-    transform:translateY(-2px);
-    background:var(--sage);
-    color:var(--ink);
-  }
+  .contact-icons{ display:flex; align-items:center; gap:0.9rem; padding-left:1.5rem; border-left:1px solid var(--periwinkle-deep); }
+  .icon-btn{ position:relative; width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--periwinkle); display:flex; align-items:center; justify-content:center; transition:transform 0.15s ease, background 0.15s ease; }
+  .icon-btn:hover{ transform:translateY(-2px); background:var(--sage); color:var(--ink); }
   .icon-btn svg{ width:17px; height:17px; }
-
-  .icon-tooltip{
-    position:absolute;
-    bottom:calc(100% + 10px);
-    left:50%;
-    transform:translateX(-50%) translateY(4px);
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Inter', sans-serif;
-    font-size:0.8rem;
-    font-weight:500;
-    white-space:nowrap;
-    padding:0.4rem 0.7rem;
-    border-radius:8px;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity 0.15s ease, transform 0.15s ease;
-    z-index:10;
-  }
-  .icon-tooltip::after{
-    content:'';
-    position:absolute;
-    top:100%;
-    left:50%;
-    transform:translateX(-50%);
-    border:5px solid transparent;
-    border-top-color:var(--ink);
-  }
-  .icon-btn:hover .icon-tooltip{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-  }
+  .icon-tooltip{ position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px); background:var(--ink); color:var(--paper); font-family:'Inter', sans-serif; font-size:0.8rem; font-weight:500; white-space:nowrap; padding:0.4rem 0.7rem; border-radius:8px; pointer-events:none; opacity:0; transition:opacity 0.15s ease, transform 0.15s ease; z-index:10; }
+  .icon-tooltip::after{ content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--ink); }
+  .icon-btn:hover .icon-tooltip{ opacity:1; transform:translateX(-50%) translateY(0); }
 
   /* ---------- HERO ---------- */
-
-  .hero{
-    max-width:1200px;
-    margin:0 auto;
-    padding:5rem 2rem 4rem;
-  }
-
-  .hero-eyebrow{
-    font-size:0.85rem;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:0.12em;
-    color:var(--sage);
-    margin-bottom:1rem;
-  }
-
-  .hero h1{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:clamp(2.4rem, 5.5vw, 4.2rem);
-    font-weight:700;
-    letter-spacing:-0.02em;
-    line-height:1.05;
-    max-width:14ch;
-  }
-
-  .hero p{
-    margin-top:1.5rem;
-    max-width:46ch;
-    font-size:1.1rem;
-    color:var(--gray);
-  }
+  .hero{ max-width:1200px; margin:0 auto; padding:3rem 2rem 2rem; }
+  .hero-eyebrow{ font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--sage); margin-bottom:1rem; }
+  .hero h1{ font-family:'Space Grotesk', sans-serif; font-size:clamp(2.4rem, 5.5vw, 4.2rem); font-weight:700; letter-spacing:-0.02em; line-height:1.05; max-width:14ch; }
+  .hero p{ margin-top:1.5rem; max-width:46ch; font-size:1.1rem; color:var(--gray); }
 
   /* ---------- SKILLS ---------- */
-
-  .skills{
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 2rem 5rem;
-  }
-
-  .skills-title{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.9rem;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin-bottom:2rem;
-  }
-
-  .skills-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1.5rem;
-  }
-
-  .skill-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1.5rem 1.6rem;
-  }
-
-  .skill-card--wide{
-    grid-column:span 2;
-  }
-
-  .skill-card h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.05rem;
-    font-weight:600;
-    margin-bottom:0.9rem;
-    padding-bottom:0.7rem;
-    border-bottom:2px solid var(--periwinkle);
-  }
-
-  .skill-card ul{
-    list-style:none;
-    display:flex;
-    flex-direction:column;
-    gap:0.5rem;
-  }
-
-  .skill-card li{
-    position:relative;
-    padding-left:1.1rem;
-    font-size:0.92rem;
-    color:var(--ink);
-    line-height:1.5;
-  }
-
-  .skill-card li::before{
-    content:'';
-    position:absolute;
-    left:0;
-    top:0.55em;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--sage);
-  }
-
-  .skill-card li strong{
-    font-weight:600;
-  }
-
-  .skill-card li a{
-    color:var(--ink);
-    text-decoration:underline;
-    text-decoration-color:var(--periwinkle-deep);
-    text-underline-offset:3px;
-    transition:color 0.15s ease;
-  }
-  .skill-card li a:hover{
-    color:var(--sage);
-  }
-
-  @media (max-width: 980px){
-    .skills-grid{ grid-template-columns:repeat(2, 1fr); }
-    .skill-card--wide{ grid-column:span 2; }
-  }
-
-  @media (max-width: 600px){
-    .skills-grid{ grid-template-columns:1fr; }
-    .skill-card--wide{ grid-column:span 1; }
-  }
+  .skills{ max-width:1200px; margin:0 auto; padding:0 2rem 5rem; }
+  .skills-title{ font-family:'Space Grotesk', sans-serif; font-size:1.9rem; font-weight:700; letter-spacing:-0.01em; margin-bottom:2rem; }
+  .skills-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1.5rem; }
+  .skill-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.5rem 1.6rem; }
+  .skill-card--wide{ grid-column:span 2; }
+  .skill-card h3{ font-family:'Space Grotesk', sans-serif; font-size:1.05rem; font-weight:600; margin-bottom:0.9rem; padding-bottom:0.7rem; border-bottom:2px solid var(--periwinkle); }
+  .skill-card ul{ list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .skill-card li{ position:relative; padding-left:1.1rem; font-size:0.92rem; color:var(--ink); line-height:1.5; }
+  .skill-card li::before{ content:''; position:absolute; left:0; top:0.55em; width:6px; height:6px; border-radius:50%; background:var(--sage); }
+  .skill-card li strong{ font-weight:600; }
+  .skill-card li a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--periwinkle-deep); text-underline-offset:3px; transition:color 0.15s ease; }
+  .skill-card li a:hover{ color:var(--sage); }
 
   /* ---------- PROJECT LABEL BAR ---------- */
-
-  .project{
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 2rem 5rem;
-  }
-
-  .project-label{
-    position:relative;
-    background:var(--periwinkle);
-    border-radius:14px;
-    padding:1.1rem 1.75rem;
-    margin-bottom:2.25rem;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-
-  .project-label h2{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.5rem;
-    font-weight:600;
-    color:var(--ink);
-    position:relative;
-    z-index:2;
-  }
-
-  .project-label .subtitle{
-    font-size:0.9rem;
-    color:var(--gray);
-    position:relative;
-    z-index:2;
-    font-weight:500;
-  }
-
-  .project-watermark{
-    position:absolute;
-    right:1rem;
-    top:50%;
-    transform:translateY(-50%);
-    font-family:'Space Grotesk', sans-serif;
-    font-size:5.5rem;
-    font-weight:700;
-    color:var(--periwinkle-deep);
-    opacity:0.55;
-    line-height:1;
-    user-select:none;
-    z-index:1;
-  }
+  .project{ max-width:1200px; margin:0 auto; padding:0 2rem 5rem; }
+  .project-label{ position:relative; background:var(--periwinkle); border-radius:14px; padding:1.1rem 1.75rem; margin-bottom:2.25rem; overflow:hidden; display:flex; align-items:center; justify-content:space-between; }
+  .project-label h2{ font-family:'Space Grotesk', sans-serif; font-size:1.5rem; font-weight:600; color:var(--ink); position:relative; z-index:2; }
+  .project-label .subtitle{ font-size:0.9rem; color:var(--gray); position:relative; z-index:2; font-weight:500; }
+  .project-watermark{ position:absolute; right:1rem; top:50%; transform:translateY(-50%); font-family:'Space Grotesk', sans-serif; font-size:5.5rem; font-weight:700; color:var(--periwinkle-deep); opacity:0.55; line-height:1; user-select:none; z-index:1; }
 
   /* ---------- COLUMNS ---------- */
-
-  .columns{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:2rem;
-  }
-
-  .col-card{
-    display:flex;
-    flex-direction:column;
-  }
+  .columns{ display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem; }
+  .col-card{ display:flex; flex-direction:column; }
 
   .col-image{
     width:100%;
@@ -343,189 +79,126 @@
     position:relative;
     margin-bottom:1.1rem;
     border:1px solid var(--line);
+    cursor:zoom-in;
   }
-
-  .col-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-
-  /* Modifier: fit by width — image scales to fill the box's full width,
-     height adjusts proportionally (no horizontal cropping, may letterbox
-     top/bottom or overflow vertically depending on the image's own ratio). */
-  .col-image img.fit-width{
-    width:100%;
-    height:auto;
-    object-fit:contain;
-  }
-
-  /* Modifier: fit by height — image scales to fill the box's full height,
-     width adjusts proportionally (no vertical cropping, may letterbox
-     left/right or overflow horizontally depending on the image's own ratio). */
-  .col-image img.fit-height{
-    width:auto;
-    height:100%;
-    object-fit:contain;
-  }
-
-  /* fit-width / fit-height use contain, so center the image and let the
-     box's background gradient show through any empty space. */
-  .col-image img.fit-width,
-  .col-image img.fit-height{
+  .col-image::after{
+    content:'⤢';
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    max-width:100%;
-    max-height:100%;
-  }
-
-  .col-image .hill-back{
-    position:absolute;
-    bottom:0; left:0; right:0;
-    height:38%;
-    background:#B7D98C;
-    border-radius:50% 50% 0 0 / 100% 100% 0 0;
-    transform:scale(1.5) translateY(20%);
-  }
-
-  .col-image .hill-front{
-    position:absolute;
-    bottom:0; left:0; right:0;
-    height:26%;
-    background:var(--sage);
-    border-radius:50% 50% 0 0 / 100% 100% 0 0;
-    transform:scale(1.6) translateY(25%);
-  }
-
-  .col-image .cloud{
-    position:absolute;
-    top:18%;
-    left:22%;
-    width:32%;
-    height:22%;
-    background:#fff;
-    border-radius:50px;
-  }
-  .col-image .cloud::before,
-  .col-image .cloud::after{
-    content:'';
-    position:absolute;
-    background:#fff;
-    border-radius:50%;
-  }
-  .col-image .cloud::before{
-    width:55%; height:140%;
-    top:-50%; left:5%;
-  }
-  .col-image .cloud::after{
-    width:45%; height:110%;
-    top:-35%; right:10%;
-  }
-
-  .col-card h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.15rem;
-    font-weight:600;
-    margin-bottom:0.65rem;
-  }
-
-  .col-card ul{
-    list-style:none;
+    bottom:8px;
+    right:10px;
+    font-size:1.1rem;
+    color:#fff;
+    background:rgba(28,27,41,0.55);
+    width:28px;
+    height:28px;
+    border-radius:6px;
     display:flex;
-    flex-direction:column;
-    gap:0.5rem;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:opacity 0.15s ease;
+    pointer-events:none;
+    line-height:28px;
+    text-align:center;
   }
+  .col-image:hover::after{ opacity:1; }
 
-  .col-card li{
-    position:relative;
-    padding-left:1.1rem;
-    font-size:0.96rem;
-    color:var(--ink);
-  }
+  .col-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .col-image img.fit-width{ width:100%; height:auto; object-fit:contain; }
+  .col-image img.fit-height{ width:auto; height:100%; object-fit:contain; }
+  .col-image img.fit-width,
+  .col-image img.fit-height{ position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); max-width:100%; max-height:100%; }
 
-  .col-card li::before{
-    content:'';
-    position:absolute;
-    left:0;
-    top:0.5em;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--sage);
-  }
+  .col-image .hill-back{ position:absolute; bottom:0; left:0; right:0; height:38%; background:#B7D98C; border-radius:50% 50% 0 0 / 100% 100% 0 0; transform:scale(1.5) translateY(20%); }
+  .col-image .hill-front{ position:absolute; bottom:0; left:0; right:0; height:26%; background:var(--sage); border-radius:50% 50% 0 0 / 100% 100% 0 0; transform:scale(1.6) translateY(25%); }
+  .col-image .cloud{ position:absolute; top:18%; left:22%; width:32%; height:22%; background:#fff; border-radius:50px; }
+  .col-image .cloud::before, .col-image .cloud::after{ content:''; position:absolute; background:#fff; border-radius:50%; }
+  .col-image .cloud::before{ width:55%; height:140%; top:-50%; left:5%; }
+  .col-image .cloud::after{ width:45%; height:110%; top:-35%; right:10%; }
 
+  .col-card h3{ font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:600; margin-bottom:0.65rem; }
+  .col-card ul{ list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .col-card li{ position:relative; padding-left:1.1rem; font-size:0.96rem; color:var(--ink); }
+  .col-card li::before{ content:''; position:absolute; left:0; top:0.5em; width:6px; height:6px; border-radius:50%; background:var(--sage); }
   .col-card.what h3{ color:var(--ink); }
   .col-card.how h3{ color:var(--ink); }
   .col-card.result h3{ color:var(--ink); }
   .col-card.result li::before{ background:#D8A857; }
   .col-card.how li::before{ background:#7C9BD9; }
 
-  /* ---------- DIVIDER ---------- */
-
-  .divider{
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 2rem;
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:rgba(28,27,41,0.92);
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    cursor:zoom-out;
   }
-  .divider hr{
+  .lightbox.open{ display:flex; }
+  .lightbox img{
+    max-width:90vw;
+    max-height:88vh;
+    border-radius:12px;
+    box-shadow:0 24px 80px rgba(0,0,0,0.6);
+    object-fit:contain;
+    animation:lb-in 0.2s ease;
+  }
+  @keyframes lb-in{
+    from{ opacity:0; transform:scale(0.94); }
+    to{   opacity:1; transform:scale(1); }
+  }
+  .lightbox-close{
+    position:fixed;
+    top:1.25rem;
+    right:1.5rem;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(250,248,245,0.15);
+    color:#fff;
+    font-size:1.3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
     border:none;
-    border-top:1px solid var(--line);
+    transition:background 0.15s ease;
+    line-height:1;
   }
+  .lightbox-close:hover{ background:rgba(250,248,245,0.3); }
+  .lightbox-caption{
+    position:fixed;
+    bottom:1.5rem;
+    left:50%;
+    transform:translateX(-50%);
+    color:rgba(250,248,245,0.7);
+    font-size:0.85rem;
+    font-family:'Inter', sans-serif;
+    white-space:nowrap;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{ max-width:1200px; margin:0 auto; padding:0 2rem; }
+  .divider hr{ border:none; border-top:1px solid var(--line); }
 
   /* ---------- FOOTER ---------- */
-
-  footer{
-    background:var(--ink);
-    color:var(--paper);
-    padding:3.5rem 2rem 2.5rem;
-    margin-top:2rem;
-  }
-
-  .footer-inner{
-    max-width:1200px;
-    margin:0 auto;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:2rem;
-  }
-
-  .footer-inner h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.6rem;
-    font-weight:600;
-    max-width:18ch;
-  }
-
-  .footer-icons{
-    display:flex;
-    gap:0.9rem;
-  }
-  .footer-icons .icon-btn{
-    background:var(--periwinkle);
-    color:var(--ink);
-  }
-  .footer-icons .icon-btn:hover{
-    background:var(--sage);
-  }
-
-  .footer-meta{
-    width:100%;
-    margin-top:2.5rem;
-    padding-top:1.5rem;
-    border-top:1px solid rgba(250,248,245,0.15);
-    font-size:0.82rem;
-    color:rgba(250,248,245,0.55);
-    display:flex;
-    justify-content:space-between;
-  }
+  footer{ background:var(--ink); color:var(--paper); padding:3.5rem 2rem 2.5rem; margin-top:2rem; }
+  .footer-inner{ max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:2rem; }
+  .footer-inner h3{ font-family:'Space Grotesk', sans-serif; font-size:1.6rem; font-weight:600; max-width:18ch; }
+  .footer-icons{ display:flex; gap:0.9rem; }
+  .footer-icons .icon-btn{ background:var(--periwinkle); color:var(--ink); }
+  .footer-icons .icon-btn:hover{ background:var(--sage); }
+  .footer-meta{ width:100%; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(250,248,245,0.15); font-size:0.82rem; color:rgba(250,248,245,0.55); display:flex; justify-content:space-between; }
 
   /* ---------- RESPONSIVE ---------- */
-
+  @media (max-width: 980px){
+    .skills-grid{ grid-template-columns:repeat(2, 1fr); }
+    .skill-card--wide{ grid-column:span 2; }
+  }
   @media (max-width: 880px){
     .columns{ grid-template-columns:1fr; gap:2.25rem; }
     .nav-links{ display:none; }
@@ -534,16 +207,12 @@
     .header-inner{ padding:1rem 1.5rem; }
     .project{ padding:0 1.5rem 3.5rem; }
   }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ transition:none !important; }
+  @media (max-width: 600px){
+    .skills-grid{ grid-template-columns:1fr; }
+    .skill-card--wide{ grid-column:span 1; }
   }
-
-  :focus-visible{
-    outline:2px solid var(--sage);
-    outline-offset:3px;
-  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ transition:none !important; } }
+  :focus-visible{ outline:2px solid var(--sage); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -579,17 +248,11 @@
 
 <section class="hero" id="about">
   <div class="hero-eyebrow">Selected Professional work and academic projects</div>
-<!--
-  <h1>Work that holds up under questions.</h1>
-  <p>A look at how a couple of recent projects came together — what they set out to do, how they got built, and what came out the other end.</p>
-  
--->  
 </section>
 
 <section class="skills" id="skills">
   <h2 class="skills-title">Skills</h2>
   <div class="skills-grid">
-
     <div class="skill-card">
       <h3>Programming</h3>
       <ul>
@@ -598,7 +261,6 @@
         <li>C++</li>
       </ul>
     </div>
-
     <div class="skill-card">
       <h3>Software</h3>
       <ul>
@@ -610,7 +272,6 @@
         <li>Processing</li>
       </ul>
     </div>
-
     <div class="skill-card">
       <h3>CAD &amp; Simulation</h3>
       <ul>
@@ -631,7 +292,6 @@
         <li>Shapr3D</li>
       </ul>
     </div>
-
     <div class="skill-card">
       <h3>Certification</h3>
       <ul>
@@ -639,7 +299,6 @@
         <li><a href="Files/Solid-Edge-Expert-Level-Certification-Solid-Edge-Certificate-CAD-Certification.pdf" target="_blank">SolidEdge Expert level</a></li>
       </ul>
     </div>
-
     <div class="skill-card skill-card--wide">
       <h3>Technical Skills</h3>
       <ul>
@@ -651,7 +310,6 @@
         <li><strong>Material Characterization:</strong> TEM, SEM, EDX Spectroscopy, Diffraction Analysis, AFM, Optical Microscopy.</li>
       </ul>
     </div>
-
   </div>
 </section>
 
@@ -663,20 +321,18 @@
     </div>
     <div class="project-watermark">01</div>
   </div>
-
   <div class="columns">
     <div class="col-card what">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 1 — What?">
         <img src="images/project1-what.png" alt="BD Onclarity HPV assay tube shuttle and holder, annotated" class="fit-height">
       </div>
       <h3>What?</h3>
       <ul>
-        Designed and fabricated a spring-based shuttle fixture for BD COR GX/MX systems, replacing tube-based testing (100–500 cycle limit) to enable 20,000+ cycle reliability testing without engineer intervention.
+        <li>Designed and fabricated a spring-based shuttle fixture for BD COR GX/MX systems, replacing tube-based testing (100–500 cycle limit) to enable 20,000+ cycle reliability testing without engineer intervention.</li>
       </ul>
     </div>
-
     <div class="col-card how">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 1 — How?">
         <img src="images/project1-how.png" alt="Project 1 how it was approached" class="fit-height">
       </div>
       <h3>How?</h3>
@@ -686,9 +342,8 @@
         <li>Evaluated CNC-machined contact plates in UHMWPE, ABS, SS, Al, and PEEK.</li>
       </ul>
     </div>
-
     <div class="col-card result">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 1 — Result">
         <img src="images/project1-results.png" alt="Project 1 results" class="fit-height">
       </div>
       <h3>Result!</h3>
@@ -696,7 +351,6 @@
         <li>Characterized tube puncture force profile using custom test fixture and Shimadzu.</li>
         <li>Validated UHMWPE plate to match tube force profile within ±10% with various springs.</li>
         <li>Confirmed consistent performance of UHMWPE plate through 20,000+ cycles.</li>
-       
       </ul>
     </div>
   </div>
@@ -712,41 +366,37 @@
     </div>
     <div class="project-watermark">02</div>
   </div>
-
   <div class="columns">
     <div class="col-card what">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 2 — What?">
         <img src="images/project2-what.png" alt="Project 2 what it was" class="fit-height">
       </div>
       <h3>What?</h3>
       <ul>
-        Designed and fabricated a bilayer activated hydrogel microneedle device for targeted drug delivery in the GI tract, targeting chronic conditions like Crohn's disease. Optimized fabrication time and tuned unfolding behavior to control drug delivery timing.
+        <li>Designed and fabricated a bilayer activated hydrogel microneedle device for targeted drug delivery in the GI tract, targeting chronic conditions like Crohn's disease.</li>
+        <li>Optimized fabrication time and tuned unfolding behavior to control drug delivery timing.</li>
       </ul>
     </div>
-
     <div class="col-card how">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 2 — How?">
         <img src="images/project2-how.png" alt="Project 2 how it was approached" class="fit-height">
       </div>
       <h3>How?</h3>
       <ul>
-       
-        <li>Fabricated PDMS microneedle stamps using metal syringe needles, Formlabs SLA, and BMF 3D printing across geometries (cylindrical, star-Shade, flower, helical spring).</li>
-        <li>Applied DOE and Minitab to identify key factors controlling hydrogel unfolding time and microneedle penetration depth in agarose intestinal surrogate. </li>
-        <li>Developed custom Python code (OpenCV, NumPy) to automate video analysis for radius of curvature and penetration depth. </li>
+        <li>Fabricated PDMS microneedle stamps using metal syringe needles, Formlabs SLA, and BMF 3D printing across geometries (cylindrical, star-shade, flower, helical spring).</li>
+        <li>Applied DOE and Minitab to identify key factors controlling hydrogel unfolding time and microneedle penetration depth in agarose intestinal surrogate.</li>
+        <li>Developed custom Python code (OpenCV, NumPy) to automate video analysis for radius of curvature and penetration depth.</li>
       </ul>
     </div>
-
     <div class="col-card result">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 2 — Result">
         <img src="images/project2-results.png" alt="Project 2 results" class="fit-height">
       </div>
       <h3>Result!</h3>
       <ul>
-        
-        <li>Reduced fabrication time from 2 hours to 10 minutes consistently. </li>
-        <li>Pinpointed hydrogel concentration and device dimensions to achieve 3-minute activation. </li>
-        <li>Cut video processing time from ~1 week to a few hours, replacing manual ImageJ workflows. </li>
+        <li>Reduced fabrication time from 2 hours to 10 minutes consistently.</li>
+        <li>Pinpointed hydrogel concentration and device dimensions to achieve 3-minute activation.</li>
+        <li>Cut video processing time from ~1 week to a few hours, replacing manual ImageJ workflows.</li>
       </ul>
     </div>
   </div>
@@ -762,25 +412,22 @@
     </div>
     <div class="project-watermark">03</div>
   </div>
-
   <div class="columns">
     <div class="col-card what">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 3 — What?">
         <img src="images/project3-what.png" alt="Project 3 what it was" class="fit-height">
       </div>
       <h3>What?</h3>
       <ul>
-        Academic project using TEM (JEOL F200) to identify and differentiate two visually similar materials deliberately ground and mixed into a single homogeneous sample.
+        <li>Academic project using TEM (JEOL F200) to identify and differentiate two visually similar materials deliberately ground and mixed into a single homogeneous sample.</li>
       </ul>
     </div>
-
     <div class="col-card how">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 3 — How?">
         <img src="images/project3-how.png" alt="Project 3 how it was approached" class="fit-height">
       </div>
       <h3>How?</h3>
       <ul>
-        
         <li>Prepared sample via drop casting onto a copper TEM grid.</li>
         <li>Used low/medium magnification imaging to map particles and flag regions of interest.</li>
         <li>Applied high magnification imaging to resolve distinct material regions.</li>
@@ -788,15 +435,14 @@
         <li>Performed STEM bright-field/dark-field imaging for nanoscale structural details.</li>
       </ul>
     </div>
-
     <div class="col-card result">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 3 — Result">
         <img src="images/project3-results.png" alt="Project 3 results" class="fit-height">
       </div>
       <h3>Result!</h3>
       <ul>
-        <li>Successfully differentiated Lizardite and Albite within the mixed sample using EDX mapping. </li> 
-        <li> Identified an unplanned contaminant, Goethite, during medium magnification imaging, confirmed via EDX mapping and diffraction patterns. </li>
+        <li>Successfully differentiated Lizardite and Albite within the mixed sample using EDX mapping.</li>
+        <li>Identified an unplanned contaminant, Goethite, during medium magnification imaging, confirmed via EDX mapping and diffraction patterns.</li>
       </ul>
     </div>
   </div>
@@ -812,20 +458,18 @@
     </div>
     <div class="project-watermark">04</div>
   </div>
-
   <div class="columns">
     <div class="col-card what">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 4 — What?">
         <img src="images/project4-what.png" alt="Project 4 what it was" class="fit-height">
       </div>
       <h3>What?</h3>
       <ul>
-       BHEL project to design and validate an electric bus for employee commuting and transport, compliant with automotive and road/transport standards including AIS-038 and AIS-156.
+        <li>BHEL project to design and validate an electric bus for employee commuting and transport, compliant with automotive and road/transport standards including AIS-038 and AIS-156.</li>
       </ul>
     </div>
-
     <div class="col-card how">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 4 — How?">
         <img src="images/project4-how.png" alt="Project 4 how it was approached" class="fit-height">
       </div>
       <h3>How?</h3>
@@ -835,17 +479,14 @@
         <li>Performed static structural analysis using Ansys, Abaqus, and NX Nastran.</li>
       </ul>
     </div>
-
     <div class="col-card result">
-      <div class="col-image">
+      <div class="col-image" data-caption="Project 4 — Result">
         <img src="images/project4-results.png" alt="Project 4 results" class="fit-height">
       </div>
       <h3>Result!</h3>
       <ul>
-       
         <li>Achieved 15% weight reduction through iterative design optimization.</li>
         <li>Validated final chassis structural integrity via simplified crash test simulation in Ansys.</li>
-
       </ul>
     </div>
   </div>
@@ -868,10 +509,47 @@
     </div>
     <div class="footer-meta">
       <span>© 2026 Narsi Reddy Sanikommu</span>
-      
     </div>
   </div>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lb-close" aria-label="Close">✕</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lightbox-caption" id="lb-caption"></div>
+</div>
+
+<script>
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbClose   = document.getElementById('lb-close');
+
+  // Open on any .col-image click that contains an <img>
+  document.querySelectorAll('.col-image').forEach(box => {
+    const img = box.querySelector('img');
+    if (!img) return;
+    box.addEventListener('click', () => {
+      lbImg.src     = img.src;
+      lbImg.alt     = img.alt;
+      lbCaption.textContent = box.dataset.caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close on overlay click, close button, or Escape
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
