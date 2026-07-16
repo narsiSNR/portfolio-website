@@ -88,38 +88,34 @@
   .btn-download:hover{ background:var(--sage); color:var(--ink); transform:translateY(-1px); }
   .btn-download svg{ width:16px; height:16px; }
 
-  /* ---------- PDF VIEWER ---------- */
+  /* ---------- RESUME IMAGE VIEWER ---------- */
   .pdf-container{
     flex:1;
-    max-width:1200px;
+    max-width:900px;
     width:100%;
     margin:0 auto;
-    padding:0 2rem 2.5rem;
+    padding:0 2rem 3rem;
   }
 
-  .pdf-frame-wrap{
+  .resume-page{
     width:100%;
-    height:calc(100vh - 195px);
-    min-height:600px;
     border-radius:14px;
     overflow:hidden;
     border:1px solid var(--line);
+    box-shadow:0 8px 40px rgba(28,27,41,0.1);
     background:#fff;
-    position:relative;
   }
 
-  iframe.pdf-viewer{
+  .resume-page img{
     width:100%;
-    height:100%;
-    border:none;
+    height:auto;
     display:block;
   }
 
-  /* Fallback — shown when PDF file isn't placed yet */
-  .pdf-fallback{
-    display:none;
-    position:absolute;
-    inset:0;
+  /* Placeholder shown before image is added */
+  .resume-placeholder{
+    aspect-ratio:8.5/11;
+    display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
@@ -129,27 +125,26 @@
     padding:2rem;
   }
 
-  .pdf-fallback svg{
+  .resume-placeholder svg{
     width:60px;
     height:60px;
     color:var(--periwinkle-deep);
-    opacity:0.9;
   }
 
-  .pdf-fallback h3{
+  .resume-placeholder h3{
     font-family:'Space Grotesk', sans-serif;
     font-size:1.25rem;
     font-weight:600;
   }
 
-  .pdf-fallback p{
+  .resume-placeholder p{
     font-size:0.95rem;
     color:var(--gray);
     max-width:38ch;
     line-height:1.6;
   }
 
-  .pdf-fallback code{
+  .resume-placeholder code{
     background:var(--periwinkle);
     color:var(--ink);
     padding:0.2rem 0.55rem;
@@ -183,9 +178,9 @@
     </div>
     <nav>
       <div class="nav-links">
-        <a href="index.html#project-1">Work</a>
-        <a href="index.html#skills">Skills</a>
         <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#project-1">Work</a>
         <a href="resume.html" class="active">Resume</a>
         <a href="index.html#contact">Contact</a>
       </div>
@@ -222,25 +217,15 @@
   </div>
 
   <div class="pdf-container">
-    <div class="pdf-frame-wrap" id="pdfWrap">
+    <div class="resume-page" id="resumePage">
 
-      <iframe
-        class="pdf-viewer"
-        id="pdfFrame"
-        src="Files/resume.pdf"
-        title="Narsi Reddy Sanikommu — Résumé"
-      ></iframe>
+      <!-- Replace the placeholder below with your resume image once ready:         -->
+      <!-- <img src="images/resume.png" alt="Narsi Reddy Sanikommu Resume">          -->
+      <!-- Supported formats: .png .jpg .webp — export from PDF at 150–200 dpi      -->
 
-      <!-- Shown when PDF file isn't placed yet -->
-      <div class="pdf-fallback" id="pdfFallback">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="12" y1="18" x2="12" y2="12"/>
-          <line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
-        <h3>Resume not found</h3>
-        
+      <div class="resume-placeholder" id="resumePlaceholder">
+        <img src="images/resume.png" alt="Narsi Reddy Sanikommu Resume" onerror="this.style.display='none'">
+               
       </div>
 
     </div>
@@ -265,30 +250,7 @@
   </div>
 </footer>
 
-<script>
-  const frame    = document.getElementById('pdfFrame');
-  const fallback = document.getElementById('pdfFallback');
 
-  // Show fallback if iframe errors
-  frame.addEventListener('error', showFallback);
-
-  // Secondary check after 2s — some browsers don't fire error for 404 in iframes
-  setTimeout(() => {
-    try {
-      const doc = frame.contentDocument || frame.contentWindow.document;
-      if (doc && (doc.title.includes('404') || doc.body.innerHTML.trim() === '')) {
-        showFallback();
-      }
-    } catch(e) {
-      // Cross-origin or PDF rendering fine — ignore
-    }
-  }, 2000);
-
-  function showFallback() {
-    frame.style.display = 'none';
-    fallback.style.display = 'flex';
-  }
-</script>
 
 </body>
 </html>
