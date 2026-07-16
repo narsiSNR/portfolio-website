@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Narsi Reddy Sanikommu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B29;
+    --paper:#FAF8F5;
+    --periwinkle:#D9D6F7;
+    --periwinkle-deep:#B6B0EE;
+    --sage:#8FA876;
+    --gray:#6B6878;
+    --line:#E4E1F2;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html, body{ height:100%; }
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); display:flex; flex-direction:column; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- HEADER ---------- */
+  header{ position:sticky; top:0; z-index:50; background:var(--periwinkle); border-bottom:1px solid var(--periwinkle-deep); }
+  .header-inner{ max-width:1200px; margin:0 auto; padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between; }
+  .brand{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.35rem; letter-spacing:-0.01em; }
+  .brand span{ color:var(--gray); font-weight:400; font-size:0.95rem; display:block; margin-top:0.15rem; font-family:'Inter', sans-serif; }
+  nav{ display:flex; align-items:center; gap:1.75rem; }
+  .nav-links{ display:flex; gap:1.75rem; font-size:0.92rem; font-weight:500; }
+  .nav-links a{ opacity:0.75; transition:opacity 0.15s ease; }
+  .nav-links a:hover{ opacity:1; }
+  .nav-links a.active{ opacity:1; border-bottom:2px solid var(--ink); padding-bottom:2px; }
+  .contact-icons{ display:flex; align-items:center; gap:0.9rem; padding-left:1.5rem; border-left:1px solid var(--periwinkle-deep); }
+  .icon-btn{ position:relative; width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--periwinkle); display:flex; align-items:center; justify-content:center; transition:transform 0.15s ease, background 0.15s ease; }
+  .icon-btn:hover{ transform:translateY(-2px); background:var(--sage); color:var(--ink); }
+  .icon-btn svg{ width:17px; height:17px; }
+  .icon-tooltip{ position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px); background:var(--ink); color:var(--paper); font-family:'Inter', sans-serif; font-size:0.8rem; font-weight:500; white-space:nowrap; padding:0.4rem 0.7rem; border-radius:8px; pointer-events:none; opacity:0; transition:opacity 0.15s ease, transform 0.15s ease; z-index:10; }
+  .icon-tooltip::after{ content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--ink); }
+  .icon-btn:hover .icon-tooltip{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* ---------- PAGE BODY ---------- */
+  .resume-wrap{ flex:1; display:flex; flex-direction:column; }
+
+  .resume-toolbar{
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+    padding:1.75rem 2rem 1.25rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+  }
+
+  .resume-toolbar .eyebrow{
+    font-size:0.8rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--sage);
+    margin-bottom:0.3rem;
+  }
+
+  .resume-toolbar h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.6rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+
+  .btn-download{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:0.9rem;
+    font-weight:500;
+    padding:0.65rem 1.3rem;
+    border-radius:9px;
+    transition:background 0.15s ease, transform 0.15s ease;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .btn-download:hover{ background:var(--sage); color:var(--ink); transform:translateY(-1px); }
+  .btn-download svg{ width:16px; height:16px; }
+
+  /* ---------- PDF VIEWER ---------- */
+  .pdf-container{
+    flex:1;
+    max-width:1200px;
+    width:100%;
+    margin:0 auto;
+    padding:0 2rem 2.5rem;
+  }
+
+  .pdf-frame-wrap{
+    width:100%;
+    height:calc(100vh - 195px);
+    min-height:600px;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#fff;
+    position:relative;
+  }
+
+  iframe.pdf-viewer{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+  }
+
+  /* Fallback — shown when PDF file isn't placed yet */
+  .pdf-fallback{
+    display:none;
+    position:absolute;
+    inset:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1.25rem;
+    background:linear-gradient(160deg, #eceaff 0%, var(--paper) 100%);
+    text-align:center;
+    padding:2rem;
+  }
+
+  .pdf-fallback svg{
+    width:60px;
+    height:60px;
+    color:var(--periwinkle-deep);
+    opacity:0.9;
+  }
+
+  .pdf-fallback h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.25rem;
+    font-weight:600;
+  }
+
+  .pdf-fallback p{
+    font-size:0.95rem;
+    color:var(--gray);
+    max-width:38ch;
+    line-height:1.6;
+  }
+
+  .pdf-fallback code{
+    background:var(--periwinkle);
+    color:var(--ink);
+    padding:0.2rem 0.55rem;
+    border-radius:5px;
+    font-size:0.88rem;
+    font-family:monospace;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); color:var(--paper); padding:2rem 2rem 1.5rem; }
+  .footer-inner{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .footer-inner p{ font-size:0.82rem; color:rgba(250,248,245,0.55); }
+  .footer-icons{ display:flex; gap:0.9rem; }
+  .footer-icons .icon-btn{ background:var(--periwinkle); color:var(--ink); }
+  .footer-icons .icon-btn:hover{ background:var(--sage); }
+
+  @media (max-width: 880px){
+    .nav-links{ display:none; }
+    .resume-toolbar{ flex-direction:column; align-items:flex-start; }
+    .pdf-frame-wrap{ height:70vh; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      Narsi Reddy Sanikommu
+      <span>Mechanical, Design &amp; Hardware Engineer</span>
+    </div>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html#project-1">Work</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#about">About</a>
+        <a href="resume.html" class="active">Resume</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="contact-icons">
+        <a class="icon-btn" href="mailto:narsireddysanikommu@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+        </a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/narsi-reddy-sanikommu/" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 10.27h-3v-4.5c0-1.07-.02-2.45-1.5-2.45-1.5 0-1.73 1.17-1.73 2.37v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z"/></svg>
+        </a>
+        <a class="icon-btn" href="tel:+19452203331" aria-label="Phone">
+          <span class="icon-tooltip">(945) 220-3331</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.91.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="resume-wrap">
+  <div class="resume-toolbar">
+    <div>
+      <div class="eyebrow">Document</div>
+      <h1>Résumé</h1>
+    </div>
+    <a class="btn-download" href="Files/resume.pdf" download="Narsi_Reddy_Sanikommu_Resume.pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download PDF
+    </a>
+  </div>
+
+  <div class="pdf-container">
+    <div class="pdf-frame-wrap" id="pdfWrap">
+
+      <iframe
+        class="pdf-viewer"
+        id="pdfFrame"
+        src="Files/resume.pdf"
+        title="Narsi Reddy Sanikommu — Résumé"
+      ></iframe>
+
+      <!-- Shown when PDF file isn't placed yet -->
+      <div class="pdf-fallback" id="pdfFallback">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
+        <h3>Resume not found</h3>
+        <p>Place your resume PDF at <code>Files/resume.pdf</code> in the same folder as these HTML files, then reload.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 Narsi Reddy Sanikommu</p>
+    <div class="footer-icons">
+      <a class="icon-btn" href="mailto:narsireddysanikommu@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/narsi-reddy-sanikommu/" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 10.27h-3v-4.5c0-1.07-.02-2.45-1.5-2.45-1.5 0-1.73 1.17-1.73 2.37v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z"/></svg>
+      </a>
+      <a class="icon-btn" href="tel:+19452203331" aria-label="Phone">
+        <span class="icon-tooltip">(945) 220-3331</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.91.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const frame    = document.getElementById('pdfFrame');
+  const fallback = document.getElementById('pdfFallback');
+
+  // Show fallback if iframe errors
+  frame.addEventListener('error', showFallback);
+
+  // Secondary check after 2s — some browsers don't fire error for 404 in iframes
+  setTimeout(() => {
+    try {
+      const doc = frame.contentDocument || frame.contentWindow.document;
+      if (doc && (doc.title.includes('404') || doc.body.innerHTML.trim() === '')) {
+        showFallback();
+      }
+    } catch(e) {
+      // Cross-origin or PDF rendering fine — ignore
+    }
+  }, 2000);
+
+  function showFallback() {
+    frame.style.display = 'none';
+    fallback.style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
